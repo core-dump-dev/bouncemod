@@ -1,0 +1,19 @@
+{
+  "key.bouncemod.toggle": "Вкл/выкл эффект покачивания",
+  "key.bouncemod.settings": "Открыть настройки Bounce",
+  "category.bouncemod": "Bounce Mod",
+  "text.bouncemod.screen.title": "Настройки Bounce Mod",
+  "text.bouncemod.category.general": "Основное",
+  "text.bouncemod.category.targets": "Цели",
+  "text.bouncemod.bpm": "BPM",
+  "text.bouncemod.amplitude": "Амплитуда",
+  "text.bouncemod.alternating": "Чередование фазы",
+  "text.bouncemod.volume": "Громкость музыки",
+  "text.bouncemod.range": "Дальность (блоки)",
+  "text.bouncemod.animals": "Животные",
+  "text.bouncemod.hostile": "Враждебные мобы",
+  "text.bouncemod.players": "Игроки",
+  "text.bouncemod.all": "Все сущности (переопределяет)",
+  "text.bouncemod.toggle.on": "Bounce: ВКЛ",
+  "text.bouncemod.toggle.off": "Bounce: ВЫКЛ"
+}

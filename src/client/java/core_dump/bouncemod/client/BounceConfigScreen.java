@@ -1,0 +1,63 @@
+package core_dump.bouncemod.client;
+
+import me.shedaniel.clothconfig2.api.ConfigBuilder;
+import me.shedaniel.clothconfig2.api.ConfigCategory;
+import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.text.Text;
+
+public final class BounceConfigScreen {
+
+    private BounceConfigScreen() {}
+
+    public static Screen create(Screen parent) {
+        BounceConfig cfg = BounceState.config;
+
+        ConfigBuilder builder = ConfigBuilder.create()
+                .setParentScreen(parent)
+                .setTitle(Text.translatable("text.bouncemod.screen.title"))
+                .setSavingRunnable(() -> {
+                    BounceState.config = cfg;
+                    cfg.save();
+                });
+
+        ConfigEntryBuilder eb = builder.entryBuilder();
+
+        ConfigCategory general = builder.getOrCreateCategory(
+                Text.translatable("text.bouncemod.category.general"));
+
+        general.addEntry(eb.startFloatField(Text.translatable("text.bouncemod.bpm"), cfg.bpm)
+                .setDefaultValue(120f).setMin(30f).setMax(300f)
+                .setSaveConsumer(v -> cfg.bpm = v).build());
+
+        general.addEntry(eb.startFloatField(Text.translatable("text.bouncemod.amplitude"), cfg.amplitude)
+                .setDefaultValue(0.33f).setMin(0f).setMax(2f)
+                .setSaveConsumer(v -> cfg.amplitude = v).build());
+
+        general.addEntry(eb.startBooleanToggle(Text.translatable("text.bouncemod.alternating"), cfg.alternating)
+                .setDefaultValue(false)
+                .setSaveConsumer(v -> cfg.alternating = v).build());
+
+        general.addEntry(eb.startFloatField(Text.translatable("text.bouncemod.volume"), cfg.musicVolume)
+                .setDefaultValue(0.7f).setMin(0f).setMax(1f)
+                .setSaveConsumer(v -> cfg.musicVolume = v).build());
+
+        general.addEntry(eb.startFloatField(Text.translatable("text.bouncemod.range"), cfg.range)
+                .setDefaultValue(32f).setMin(4f).setMax(128f)
+                .setSaveConsumer(v -> cfg.range = v).build());
+
+        ConfigCategory targets = builder.getOrCreateCategory(
+                Text.translatable("text.bouncemod.category.targets"));
+
+        targets.addEntry(eb.startBooleanToggle(Text.translatable("text.bouncemod.animals"), cfg.enableAnimals)
+                .setDefaultValue(true).setSaveConsumer(v -> cfg.enableAnimals = v).build());
+        targets.addEntry(eb.startBooleanToggle(Text.translatable("text.bouncemod.hostile"), cfg.enableHostile)
+                .setDefaultValue(true).setSaveConsumer(v -> cfg.enableHostile = v).build());
+        targets.addEntry(eb.startBooleanToggle(Text.translatable("text.bouncemod.players"), cfg.enablePlayers)
+                .setDefaultValue(true).setSaveConsumer(v -> cfg.enablePlayers = v).build());
+        targets.addEntry(eb.startBooleanToggle(Text.translatable("text.bouncemod.all"), cfg.enableAllEntities)
+                .setDefaultValue(false).setSaveConsumer(v -> cfg.enableAllEntities = v).build());
+
+        return builder.build();
+    }
+}

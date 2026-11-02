@@ -1,0 +1,8 @@
+{
+  "bounce_music": {
+    "category": "music",
+    "sounds": [
+      { "name": "bounce-mod:bounce_music", "stream": true }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "key.bouncemod.toggle": "Toggle Bounce Effect",
+  "key.bouncemod.settings": "Open Bounce Settings",
+  "category.bouncemod": "Bounce Mod",
+  "text.bouncemod.screen.title": "Bounce Mod Settings",
+  "text.bouncemod.category.general": "General",
+  "text.bouncemod.category.targets": "Targets",
+  "text.bouncemod.bpm": "BPM",
+  "text.bouncemod.amplitude": "Amplitude",
+  "text.bouncemod.alternating": "Alternating Phase",
+  "text.bouncemod.volume": "Music Volume",
+  "text.bouncemod.range": "Range (blocks)",
+  "text.bouncemod.animals": "Animals",
+  "text.bouncemod.hostile": "Hostile Mobs",
+  "text.bouncemod.players": "Players",
+  "text.bouncemod.all": "All Entities (override)",
+  "text.bouncemod.toggle.on": "Bounce: ON",
+  "text.bouncemod.toggle.off": "Bounce: OFF"
+}

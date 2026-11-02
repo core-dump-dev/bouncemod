@@ -1,38 +1,39 @@
 {
-	"schemaVersion": 1,
-	"id": "bounce-mod",
-	"version": "${version}",
-	"name": "Bounce Mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
-	"authors": [
-		"Me!"
-	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
-	},
-	"license": "CC0-1.0",
-	"icon": "assets/bounce-mod/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"core_dump.bouncemod.BounceMod"
-		],
-		"client": [
-			"core_dump.bouncemod.client.BounceModClient"
-		]
-	},
-	"mixins": [
-		"bounce-mod.mixins.json",
-		{
-			"config": "bounce-mod.client.mixins.json",
-			"environment": "client"
-		}
-	],
-	"depends": {
-		"fabricloader": ">=0.20.1",
-		"minecraft": "~26.3",
-		"java": ">=25",
-		"fabric-api": "*"
-	}
+  "schemaVersion": 1,
+  "id": "bounce-mod",
+  "version": "${version}",
+
+  "name": "Bounce Mod",
+  "description": "Клиентский мод: все сущности покачиваются в такт музыке.",
+  "authors": ["core_dump"],
+  "contact": {},
+
+  "license": "MIT",
+  "icon": "assets/bounce-mod/icon.png",
+
+  "environment": "client",
+
+  "entrypoints": {
+    "client": ["core_dump.bouncemod.client.BounceModClient"],
+    "modmenu": ["core_dump.bouncemod.client.ModMenuIntegration"]
+  },
+
+  "mixins": [
+    {
+      "config": "bounce-mod.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*",
+    "cloth-config": ">=17.0.0"
+  },
+
+  "recommends": {
+    "modmenu": ">=11.0.0"
+  }
 }
