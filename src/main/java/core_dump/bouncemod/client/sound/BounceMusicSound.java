@@ -3,7 +3,7 @@ package core_dump.bouncemod.client.sound;
 import core_dump.bouncemod.client.BounceState;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.resources.Identifier;
-import net.minecraft.sound.SoundSource;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 
 public class BounceMusicSound extends AbstractSoundInstance {

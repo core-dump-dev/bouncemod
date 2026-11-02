@@ -1,10 +1,10 @@
 package core_dump.bouncemod.client.mixin;
 
-import com.mojang.blaze3d.vertex.MultiBufferSource;
 import com.mojang.blaze3d.vertex.PoseStack;
 import core_dump.bouncemod.client.BounceConfig;
 import core_dump.bouncemod.client.BounceState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
