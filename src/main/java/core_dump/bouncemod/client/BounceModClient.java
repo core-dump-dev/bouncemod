@@ -9,7 +9,6 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
-import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,12 +28,10 @@ public class BounceModClient implements ClientModInitializer {
         BounceState.reload();
 
         toggleKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
-                "key.bouncemod.toggle", InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_F2, "category.bouncemod"));
+                "key.bouncemod.toggle", InputConstants.KEY_F2, "category.bouncemod"));
 
         settingsKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
-                "key.bouncemod.settings", InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_F1, "category.bouncemod"));
+                "key.bouncemod.settings", InputConstants.KEY_F1, "category.bouncemod"));
 
         ClientTickEvents.END_CLIENT_TICK.register(this::onClientTick);
         LOGGER.info("[BounceMod] Ready");
@@ -45,14 +42,14 @@ public class BounceModClient implements ClientModInitializer {
             BounceState.toggle();
             syncMusic(client);
             if (client.player != null) {
-                client.player.displayClientMessage(
-                        Component.translatable(BounceState.enabled
+                client.player.sendSystemMessage(Component.translatable(
+                        BounceState.enabled
                                 ? "text.bouncemod.toggle.on"
-                                : "text.bouncemod.toggle.off"), true);
+                                : "text.bouncemod.toggle.off"));
             }
         }
         while (settingsKey.consumeClick()) {
-            client.setScreen(BounceConfigScreen.create(client.screen));
+            client.setScreen(BounceConfigScreen.create(client.currentScreen));
         }
         if (BounceState.enabled) syncMusic(client);
     }
