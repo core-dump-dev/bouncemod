@@ -1,14 +1,14 @@
 package core_dump.bouncemod.client;
 
 import core_dump.bouncemod.client.sound.BounceMusicSound;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.sound.SoundManager;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.text.Text;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +18,8 @@ public class BounceModClient implements ClientModInitializer {
     public static final String MOD_ID = "bounce-mod";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-    public static KeyBinding toggleKey;
-    public static KeyBinding settingsKey;
+    public static KeyMapping toggleKey;
+    public static KeyMapping settingsKey;
 
     private static BounceMusicSound musicSound;
 
@@ -28,43 +28,43 @@ public class BounceModClient implements ClientModInitializer {
         LOGGER.info("[BounceMod] Init");
         BounceState.reload();
 
-        toggleKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.bouncemod.toggle", InputUtil.Type.KEYSYM,
+        toggleKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
+                "key.bouncemod.toggle", InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_F2, "category.bouncemod"));
 
-        settingsKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.bouncemod.settings", InputUtil.Type.KEYSYM,
+        settingsKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
+                "key.bouncemod.settings", InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_F1, "category.bouncemod"));
 
         ClientTickEvents.END_CLIENT_TICK.register(this::onClientTick);
         LOGGER.info("[BounceMod] Ready");
     }
 
-    private void onClientTick(MinecraftClient client) {
-        while (toggleKey.wasPressed()) {
+    private void onClientTick(Minecraft client) {
+        while (toggleKey.consumeClick()) {
             BounceState.toggle();
             syncMusic(client);
             if (client.player != null) {
-                client.player.sendMessage(
-                        Text.translatable(BounceState.enabled
+                client.player.displayClientMessage(
+                        Component.translatable(BounceState.enabled
                                 ? "text.bouncemod.toggle.on"
                                 : "text.bouncemod.toggle.off"), true);
             }
         }
-        while (settingsKey.wasPressed()) {
-            client.setScreen(BounceConfigScreen.create(client.currentScreen));
+        while (settingsKey.consumeClick()) {
+            client.setScreen(BounceConfigScreen.create(client.screen));
         }
         if (BounceState.enabled) syncMusic(client);
     }
 
-    private static void syncMusic(MinecraftClient client) {
+    private static void syncMusic(Minecraft client) {
         if (client == null) return;
         SoundManager sm = client.getSoundManager();
         if (sm == null) return;
         if (BounceState.enabled) {
             if (musicSound == null) musicSound = new BounceMusicSound();
-            if (!sm.isPlaying(musicSound)) sm.play(musicSound);
-        } else if (musicSound != null && sm.isPlaying(musicSound)) {
+            if (!sm.isActive(musicSound)) sm.play(musicSound);
+        } else if (musicSound != null && sm.isActive(musicSound)) {
             sm.stop(musicSound);
         }
     }

@@ -22,36 +22,23 @@ dependencies {
 processResources {
     def version = project.version
     inputs.property "version", version
-
-    filesMatching("fabric.mod.json") {
-        expand "version": version
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.release = 25
+    filesMatching("fabric.mod.json") { expand "version": version }
 }
 
 java {
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
     withSourcesJar()
-    sourceCompatibility = JavaVersion.VERSION_25
-    targetCompatibility = JavaVersion.VERSION_25
 }
+
+tasks.withType(JavaCompile).configureEach { it.options.release = 25 }
 
 jar {
     def projectName = project.name
     inputs.property "projectName", projectName
-
-    from("LICENSE") {
-        rename { "${it}_$projectName" }
-    }
+    from("LICENSE") { rename { "${it}_$projectName" } }
 }
 
 publishing {
-    publications {
-        create("mavenJava", MavenPublication) {
-            from components.java
-        }
-    }
+    publications { create("mavenJava", MavenPublication) { from components.java } }
     repositories { }
 }
