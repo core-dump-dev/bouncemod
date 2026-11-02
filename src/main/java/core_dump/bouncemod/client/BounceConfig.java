@@ -19,7 +19,7 @@ public class BounceConfig {
     public float bpm = 135.0f;
     public float amplitude = 0.9f;
     public boolean alternating = false;
-    public float musicVolume = 0.7f;
+    public float musicVolume = 0.2f;   // 20% по умолчанию
     public float range = 32.0f;
 
     public boolean enableAnimals = true;

@@ -12,7 +12,6 @@ public class BounceMusicSound extends AbstractTickableSoundInstance {
     private static final Identifier ID =
             Identifier.fromNamespaceAndPath("bounce-mod", "bounce_music");
 
-    // В 26.3 вместо SoundEvent.of(...) используется createVariableRangeEvent(...)
     private static final SoundEvent EVENT =
             SoundEvent.createVariableRangeEvent(ID);
 
@@ -22,7 +21,6 @@ public class BounceMusicSound extends AbstractTickableSoundInstance {
 
     @Override
     public void tick() {
-        // Каждый тик обновляем громкость — SoundManager применит новое значение сразу
         this.volume = BounceState.config.musicVolume;
     }
 

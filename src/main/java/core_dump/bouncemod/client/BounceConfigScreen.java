@@ -37,7 +37,7 @@ public final class BounceConfigScreen {
                 .setSaveConsumer(v -> cfg.language = v)
                 .build());
 
-        // ===== BPM (целый слайдер) =====
+        // ===== BPM =====
         general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.bpm"),
                         (int) cfg.bpm, 30, 300)
                 .setDefaultValue(135)
@@ -45,7 +45,7 @@ public final class BounceConfigScreen {
                 .setSaveConsumer(v -> cfg.bpm = v)
                 .build());
 
-        // ===== Squash Amount (int 0..200, реальное значение = /100) =====
+        // ===== Squash Amount =====
         general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.amplitude"),
                         (int) (cfg.amplitude * 100), 0, 200)
                 .setDefaultValue(90)
@@ -61,15 +61,15 @@ public final class BounceConfigScreen {
                 .setSaveConsumer(v -> cfg.alternating = v)
                 .build());
 
-        // ===== Volume (int 0..100, реальное значение = /100) =====
+        // ===== Volume (дефолт 20) =====
         general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.volume"),
                         (int) (cfg.musicVolume * 100), 0, 100)
-                .setDefaultValue(70)
+                .setDefaultValue(20)
                 .setTooltip(ModLang.t("text.bouncemod.volume.tooltip"))
                 .setSaveConsumer(v -> cfg.musicVolume = v / 100f)
                 .build());
 
-        // ===== Range (целый слайдер) =====
+        // ===== Range =====
         general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.range"),
                         (int) cfg.range, 4, 128)
                 .setDefaultValue(32)

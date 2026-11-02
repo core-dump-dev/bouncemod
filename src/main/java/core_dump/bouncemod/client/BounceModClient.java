@@ -60,11 +60,12 @@ public class BounceModClient implements ClientModInitializer {
             }
         }
         while (settingsKey.consumeClick()) {
-            // В 26.2+ screen переехал в Gui
             client.gui.setScreen(BounceConfigScreen.create(client.gui.screen()));
         }
 
         if (BounceState.enabled) {
+            // Останавливаем фоновую музыку Minecraft, чтобы не было конфликта
+            client.getMusicManager().stopPlaying();
             syncMusic(client);
         } else {
             stopMusic(client);
