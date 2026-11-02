@@ -15,7 +15,7 @@ public class BounceConfig {
             FabricLoader.getInstance().getConfigDir().resolve("bouncemod.json");
 
     public float bpm = 120.0f;
-    public float amplitude = 0.33f;
+    public float amplitude = 0.9f;      // сила сжатия (squash), по умолчанию заметная
     public boolean alternating = false;
     public float musicVolume = 0.7f;
     public float range = 32.0f;

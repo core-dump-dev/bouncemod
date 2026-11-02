@@ -1,19 +1,33 @@
 {
-  "key.bouncemod.toggle": "Toggle Bounce Effect",
-  "key.bouncemod.settings": "Open Bounce Settings",
-  "category.bouncemod": "Bounce Mod",
-  "text.bouncemod.screen.title": "Bounce Mod Settings",
+  "key.bouncemod.toggle": "Toggle Squash Effect",
+  "key.bouncemod.settings": "Open Squash Settings",
+  "category.bouncemod": "Squash Mod",
+
+  "text.bouncemod.screen.title": "Squash Mod Settings",
   "text.bouncemod.category.general": "General",
   "text.bouncemod.category.targets": "Targets",
+
   "text.bouncemod.bpm": "BPM",
-  "text.bouncemod.amplitude": "Amplitude",
+  "text.bouncemod.bpm.tooltip": "Beats per minute — how fast entities squash.",
+
+  "text.bouncemod.amplitude": "Squash Amount",
+  "text.bouncemod.amplitude.tooltip": "How strong the squash is. 0 = off, 2 = extreme.",
+
   "text.bouncemod.alternating": "Alternating Phase",
+  "text.bouncemod.alternating.tooltip": "Neighbouring entities squash in opposite phase.",
+
   "text.bouncemod.volume": "Music Volume",
+  "text.bouncemod.volume.tooltip": "Volume of the bounce music (0 to 1).",
+
   "text.bouncemod.range": "Range (blocks)",
+  "text.bouncemod.range.tooltip": "Max distance for entities to squash.",
+
   "text.bouncemod.animals": "Animals",
   "text.bouncemod.hostile": "Hostile Mobs",
   "text.bouncemod.players": "Players",
   "text.bouncemod.all": "All Entities (override)",
-  "text.bouncemod.toggle.on": "Bounce: ON",
-  "text.bouncemod.toggle.off": "Bounce: OFF"
+  "text.bouncemod.all.tooltip": "If on, every living entity squashes regardless of the categories above.",
+
+  "text.bouncemod.toggle.on": "Squash: ON",
+  "text.bouncemod.toggle.off": "Squash: OFF"
 }

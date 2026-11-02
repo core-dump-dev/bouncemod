@@ -1,19 +1,33 @@
 {
-  "key.bouncemod.toggle": "Вкл/выкл эффект покачивания",
-  "key.bouncemod.settings": "Открыть настройки Bounce",
-  "category.bouncemod": "Bounce Mod",
-  "text.bouncemod.screen.title": "Настройки Bounce Mod",
+  "key.bouncemod.toggle": "Вкл/выкл эффект сжатия",
+  "key.bouncemod.settings": "Открыть настройки сжатия",
+  "category.bouncemod": "Squash Mod",
+
+  "text.bouncemod.screen.title": "Настройки Squash Mod",
   "text.bouncemod.category.general": "Основное",
   "text.bouncemod.category.targets": "Цели",
+
   "text.bouncemod.bpm": "BPM",
-  "text.bouncemod.amplitude": "Амплитуда",
+  "text.bouncemod.bpm.tooltip": "Ударов в минуту — как быстро сущности сжимаются.",
+
+  "text.bouncemod.amplitude": "Сила сжатия",
+  "text.bouncemod.amplitude.tooltip": "Насколько сильно сжимается модель. 0 — выкл, 2 — максимум.",
+
   "text.bouncemod.alternating": "Чередование фазы",
+  "text.bouncemod.alternating.tooltip": "Соседние сущности сжимаются в противоположной фазе.",
+
   "text.bouncemod.volume": "Громкость музыки",
+  "text.bouncemod.volume.tooltip": "Громкость музыки (от 0 до 1).",
+
   "text.bouncemod.range": "Дальность (блоки)",
+  "text.bouncemod.range.tooltip": "Максимальное расстояние, на котором сущности сжимаются.",
+
   "text.bouncemod.animals": "Животные",
   "text.bouncemod.hostile": "Враждебные мобы",
   "text.bouncemod.players": "Игроки",
   "text.bouncemod.all": "Все сущности (переопределяет)",
-  "text.bouncemod.toggle.on": "Bounce: ВКЛ",
-  "text.bouncemod.toggle.off": "Bounce: ВЫКЛ"
+  "text.bouncemod.all.tooltip": "Если включено, сжимаются все живые сущности, независимо от галочек выше.",
+
+  "text.bouncemod.toggle.on": "Squash: ВКЛ",
+  "text.bouncemod.toggle.off": "Squash: ВЫКЛ"
 }

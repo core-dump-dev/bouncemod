@@ -28,22 +28,27 @@ public final class BounceConfigScreen {
 
         general.addEntry(eb.startFloatField(Component.translatable("text.bouncemod.bpm"), cfg.bpm)
                 .setDefaultValue(120f).setMin(30f).setMax(300f)
+                .setTooltip(Component.translatable("text.bouncemod.bpm.tooltip"))
                 .setSaveConsumer(v -> cfg.bpm = v).build());
 
         general.addEntry(eb.startFloatField(Component.translatable("text.bouncemod.amplitude"), cfg.amplitude)
-                .setDefaultValue(0.33f).setMin(0f).setMax(2f)
+                .setDefaultValue(0.9f).setMin(0f).setMax(2f)
+                .setTooltip(Component.translatable("text.bouncemod.amplitude.tooltip"))
                 .setSaveConsumer(v -> cfg.amplitude = v).build());
 
         general.addEntry(eb.startBooleanToggle(Component.translatable("text.bouncemod.alternating"), cfg.alternating)
                 .setDefaultValue(false)
+                .setTooltip(Component.translatable("text.bouncemod.alternating.tooltip"))
                 .setSaveConsumer(v -> cfg.alternating = v).build());
 
         general.addEntry(eb.startFloatField(Component.translatable("text.bouncemod.volume"), cfg.musicVolume)
                 .setDefaultValue(0.7f).setMin(0f).setMax(1f)
+                .setTooltip(Component.translatable("text.bouncemod.volume.tooltip"))
                 .setSaveConsumer(v -> cfg.musicVolume = v).build());
 
         general.addEntry(eb.startFloatField(Component.translatable("text.bouncemod.range"), cfg.range)
                 .setDefaultValue(32f).setMin(4f).setMax(128f)
+                .setTooltip(Component.translatable("text.bouncemod.range.tooltip"))
                 .setSaveConsumer(v -> cfg.range = v).build());
 
         ConfigCategory targets = builder.getOrCreateCategory(
@@ -56,7 +61,9 @@ public final class BounceConfigScreen {
         targets.addEntry(eb.startBooleanToggle(Component.translatable("text.bouncemod.players"), cfg.enablePlayers)
                 .setDefaultValue(true).setSaveConsumer(v -> cfg.enablePlayers = v).build());
         targets.addEntry(eb.startBooleanToggle(Component.translatable("text.bouncemod.all"), cfg.enableAllEntities)
-                .setDefaultValue(false).setSaveConsumer(v -> cfg.enableAllEntities = v).build());
+                .setDefaultValue(false)
+                .setTooltip(Component.translatable("text.bouncemod.all.tooltip"))
+                .setSaveConsumer(v -> cfg.enableAllEntities = v).build());
 
         return builder.build();
     }
