@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import core_dump.bouncemod.client.BounceConfig;
 import core_dump.bouncemod.client.BounceState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
@@ -20,7 +20,7 @@ public class LivingEntityRendererMixin<T extends LivingEntity> {
 
     @Inject(method = "render", at = @At("HEAD"))
     private void bouncemod$applyBounce(T entity, float entityYaw, float partialTicks,
-                                        PoseStack poseStack, MultiBufferSource buffer,
+                                        PoseStack poseStack, SubmitNodeCollector collector,
                                         int packedLight, CallbackInfo ci) {
         if (!BounceState.enabled) return;
         BounceConfig cfg = BounceState.config;
