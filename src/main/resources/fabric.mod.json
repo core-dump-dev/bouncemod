@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Bounce Mod",
-  "description": "Клиентский мод: все сущности покачиваются в такт музыке.",
+  "description": "Клиентский мод: все сущности покачиваются в такт музыке. Настройки BPM, амплитуды, чередования фазы, громкости и дальности. По мотивам Why's This Dealer / CarbonBounce.",
   "authors": ["core_dump"],
   "contact": {},
 
@@ -19,10 +19,7 @@
   },
 
   "mixins": [
-    {
-      "config": "bounce-mod.client.mixins.json",
-      "environment": "client"
-    }
+    "bounce-mod.client.mixins.json"
   ],
 
   "depends": {
@@ -30,10 +27,10 @@
     "minecraft": "~26.3",
     "java": ">=25",
     "fabric-api": "*",
-    "cloth-config": ">=17.0.0"
+    "cloth-config": ">=26.3.159"
   },
 
   "recommends": {
-    "modmenu": ">=11.0.0"
+    "modmenu": ">=21.0.0"
   }
 }
