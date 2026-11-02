@@ -1,18 +1,23 @@
 package core_dump.bouncemod.client.sound;
 
 import core_dump.bouncemod.client.BounceState;
-import net.minecraft.client.resources.sounds.AbstractSoundInstance;
+import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 
-public class BounceMusicSound extends AbstractSoundInstance {
+public class BounceMusicSound extends AbstractTickableSoundInstance {
 
     private static final Identifier ID =
             Identifier.fromNamespaceAndPath("bounce-mod", "bounce_music");
 
+    // В 26.3 вместо SoundEvent.of(...) используется createVariableRangeEvent(...)
+    private static final SoundEvent EVENT =
+            SoundEvent.createVariableRangeEvent(ID);
+
     public BounceMusicSound() {
-        super(ID, SoundSource.MUSIC, RandomSource.create());
+        super(EVENT, SoundSource.MUSIC, RandomSource.create());
     }
 
     @Override

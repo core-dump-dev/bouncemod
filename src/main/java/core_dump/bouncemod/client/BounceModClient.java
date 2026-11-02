@@ -60,7 +60,8 @@ public class BounceModClient implements ClientModInitializer {
             }
         }
         while (settingsKey.consumeClick()) {
-            client.setScreen(BounceConfigScreen.create(client.screen));
+            // В 26.2+ screen переехал в Gui
+            client.gui.setScreen(BounceConfigScreen.create(client.gui.screen()));
         }
 
         if (BounceState.enabled) {

@@ -37,7 +37,7 @@ public final class BounceConfigScreen {
                 .setSaveConsumer(v -> cfg.language = v)
                 .build());
 
-        // ===== BPM =====
+        // ===== BPM (целый слайдер) =====
         general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.bpm"),
                         (int) cfg.bpm, 30, 300)
                 .setDefaultValue(135)
@@ -45,12 +45,12 @@ public final class BounceConfigScreen {
                 .setSaveConsumer(v -> cfg.bpm = v)
                 .build());
 
-        // ===== Squash Amount =====
-        general.addEntry(eb.startFloatSlider(ModLang.t("text.bouncemod.amplitude"),
-                        cfg.amplitude, 0f, 2f)
-                .setDefaultValue(0.9f)
+        // ===== Squash Amount (int 0..200, реальное значение = /100) =====
+        general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.amplitude"),
+                        (int) (cfg.amplitude * 100), 0, 200)
+                .setDefaultValue(90)
                 .setTooltip(ModLang.t("text.bouncemod.amplitude.tooltip"))
-                .setSaveConsumer(v -> cfg.amplitude = v)
+                .setSaveConsumer(v -> cfg.amplitude = v / 100f)
                 .build());
 
         // ===== Alternating =====
@@ -61,15 +61,15 @@ public final class BounceConfigScreen {
                 .setSaveConsumer(v -> cfg.alternating = v)
                 .build());
 
-        // ===== Volume =====
-        general.addEntry(eb.startFloatSlider(ModLang.t("text.bouncemod.volume"),
-                        cfg.musicVolume, 0f, 1f)
-                .setDefaultValue(0.7f)
+        // ===== Volume (int 0..100, реальное значение = /100) =====
+        general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.volume"),
+                        (int) (cfg.musicVolume * 100), 0, 100)
+                .setDefaultValue(70)
                 .setTooltip(ModLang.t("text.bouncemod.volume.tooltip"))
-                .setSaveConsumer(v -> cfg.musicVolume = v)
+                .setSaveConsumer(v -> cfg.musicVolume = v / 100f)
                 .build());
 
-        // ===== Range =====
+        // ===== Range (целый слайдер) =====
         general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.range"),
                         (int) cfg.range, 4, 128)
                 .setDefaultValue(32)
