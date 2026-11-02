@@ -29,5 +29,8 @@
   "text.bouncemod.all.tooltip": "Если включено, сжимаются все живые сущности, независимо от галочек выше.",
 
   "text.bouncemod.toggle.on": "Squash: ВКЛ",
-  "text.bouncemod.toggle.off": "Squash: ВЫКЛ"
+  "text.bouncemod.toggle.off": "Squash: ВЫКЛ",
+
+  "text.bouncemod.language": "Язык интерфейса",
+  "text.bouncemod.language.tooltip": "Язык этого экрана настроек. «Авто» — язык игры."
 }

@@ -15,7 +15,7 @@ public final class BounceConfigScreen {
 
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(parent)
-                .setTitle(Component.translatable("text.bouncemod.screen.title"))
+                .setTitle(ModLang.t("text.bouncemod.screen.title"))
                 .setSavingRunnable(() -> {
                     BounceState.config = cfg;
                     cfg.save();
@@ -24,46 +24,87 @@ public final class BounceConfigScreen {
         ConfigEntryBuilder eb = builder.entryBuilder();
 
         ConfigCategory general = builder.getOrCreateCategory(
-                Component.translatable("text.bouncemod.category.general"));
+                ModLang.t("text.bouncemod.category.general"));
 
-        general.addEntry(eb.startFloatField(Component.translatable("text.bouncemod.bpm"), cfg.bpm)
-                .setDefaultValue(120f).setMin(30f).setMax(300f)
-                .setTooltip(Component.translatable("text.bouncemod.bpm.tooltip"))
-                .setSaveConsumer(v -> cfg.bpm = v).build());
+        // ===== Language =====
+        general.addEntry(eb.startEnumSelector(
+                        ModLang.t("text.bouncemod.language"),
+                        ModLanguage.class,
+                        cfg.language)
+                .setDefaultValue(ModLanguage.AUTO)
+                .setTooltip(ModLang.t("text.bouncemod.language.tooltip"))
+                .setEnumNameProvider(e -> Component.literal(ModLang.displayName((ModLanguage) e)))
+                .setSaveConsumer(v -> cfg.language = v)
+                .build());
 
-        general.addEntry(eb.startFloatField(Component.translatable("text.bouncemod.amplitude"), cfg.amplitude)
-                .setDefaultValue(0.9f).setMin(0f).setMax(2f)
-                .setTooltip(Component.translatable("text.bouncemod.amplitude.tooltip"))
-                .setSaveConsumer(v -> cfg.amplitude = v).build());
+        // ===== BPM =====
+        general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.bpm"),
+                        (int) cfg.bpm, 30, 300)
+                .setDefaultValue(135)
+                .setTooltip(ModLang.t("text.bouncemod.bpm.tooltip"))
+                .setSaveConsumer(v -> cfg.bpm = v)
+                .build());
 
-        general.addEntry(eb.startBooleanToggle(Component.translatable("text.bouncemod.alternating"), cfg.alternating)
+        // ===== Squash Amount =====
+        general.addEntry(eb.startFloatSlider(ModLang.t("text.bouncemod.amplitude"),
+                        cfg.amplitude, 0f, 2f)
+                .setDefaultValue(0.9f)
+                .setTooltip(ModLang.t("text.bouncemod.amplitude.tooltip"))
+                .setSaveConsumer(v -> cfg.amplitude = v)
+                .build());
+
+        // ===== Alternating =====
+        general.addEntry(eb.startBooleanToggle(ModLang.t("text.bouncemod.alternating"),
+                        cfg.alternating)
                 .setDefaultValue(false)
-                .setTooltip(Component.translatable("text.bouncemod.alternating.tooltip"))
-                .setSaveConsumer(v -> cfg.alternating = v).build());
+                .setTooltip(ModLang.t("text.bouncemod.alternating.tooltip"))
+                .setSaveConsumer(v -> cfg.alternating = v)
+                .build());
 
-        general.addEntry(eb.startFloatField(Component.translatable("text.bouncemod.volume"), cfg.musicVolume)
-                .setDefaultValue(0.7f).setMin(0f).setMax(1f)
-                .setTooltip(Component.translatable("text.bouncemod.volume.tooltip"))
-                .setSaveConsumer(v -> cfg.musicVolume = v).build());
+        // ===== Volume =====
+        general.addEntry(eb.startFloatSlider(ModLang.t("text.bouncemod.volume"),
+                        cfg.musicVolume, 0f, 1f)
+                .setDefaultValue(0.7f)
+                .setTooltip(ModLang.t("text.bouncemod.volume.tooltip"))
+                .setSaveConsumer(v -> cfg.musicVolume = v)
+                .build());
 
-        general.addEntry(eb.startFloatField(Component.translatable("text.bouncemod.range"), cfg.range)
-                .setDefaultValue(32f).setMin(4f).setMax(128f)
-                .setTooltip(Component.translatable("text.bouncemod.range.tooltip"))
-                .setSaveConsumer(v -> cfg.range = v).build());
+        // ===== Range =====
+        general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.range"),
+                        (int) cfg.range, 4, 128)
+                .setDefaultValue(32)
+                .setTooltip(ModLang.t("text.bouncemod.range.tooltip"))
+                .setSaveConsumer(v -> cfg.range = v)
+                .build());
 
+        // ===== Targets =====
         ConfigCategory targets = builder.getOrCreateCategory(
-                Component.translatable("text.bouncemod.category.targets"));
+                ModLang.t("text.bouncemod.category.targets"));
 
-        targets.addEntry(eb.startBooleanToggle(Component.translatable("text.bouncemod.animals"), cfg.enableAnimals)
-                .setDefaultValue(true).setSaveConsumer(v -> cfg.enableAnimals = v).build());
-        targets.addEntry(eb.startBooleanToggle(Component.translatable("text.bouncemod.hostile"), cfg.enableHostile)
-                .setDefaultValue(true).setSaveConsumer(v -> cfg.enableHostile = v).build());
-        targets.addEntry(eb.startBooleanToggle(Component.translatable("text.bouncemod.players"), cfg.enablePlayers)
-                .setDefaultValue(true).setSaveConsumer(v -> cfg.enablePlayers = v).build());
-        targets.addEntry(eb.startBooleanToggle(Component.translatable("text.bouncemod.all"), cfg.enableAllEntities)
+        targets.addEntry(eb.startBooleanToggle(ModLang.t("text.bouncemod.animals"),
+                        cfg.enableAnimals)
+                .setDefaultValue(true)
+                .setSaveConsumer(v -> cfg.enableAnimals = v)
+                .build());
+
+        targets.addEntry(eb.startBooleanToggle(ModLang.t("text.bouncemod.hostile"),
+                        cfg.enableHostile)
+                .setDefaultValue(true)
+                .setSaveConsumer(v -> cfg.enableHostile = v)
+                .build());
+
+        targets.addEntry(eb.startBooleanToggle(ModLang.t("text.bouncemod.players"),
+                        cfg.enablePlayers)
+                .setDefaultValue(true)
+                .setSaveConsumer(v -> cfg.enablePlayers = v)
+                .build());
+
+        targets.addEntry(eb.startBooleanToggle(ModLang.t("text.bouncemod.all"),
+                        cfg.enableAllEntities)
                 .setDefaultValue(false)
-                .setTooltip(Component.translatable("text.bouncemod.all.tooltip"))
-                .setSaveConsumer(v -> cfg.enableAllEntities = v).build());
+                .setTooltip(ModLang.t("text.bouncemod.all.tooltip"))
+                .setSaveConsumer(v -> cfg.enableAllEntities = v)
+                .build());
 
         return builder.build();
     }

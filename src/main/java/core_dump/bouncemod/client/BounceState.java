@@ -2,7 +2,8 @@ package core_dump.bouncemod.client;
 
 public final class BounceState {
 
-    public static volatile boolean enabled = true;
+    // Эффект выключен по умолчанию — музыка не играет до входа в мир
+    public static volatile boolean enabled = false;
     public static volatile BounceConfig config = BounceConfig.load();
 
     private BounceState() {}

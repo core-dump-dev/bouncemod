@@ -43,6 +43,12 @@ public class BounceModClient implements ClientModInitializer {
     }
 
     private void onClientTick(Minecraft client) {
+        // Если игрок не в мире — принудительно останавливаем музыку
+        if (client.player == null || client.level == null) {
+            stopMusic(client);
+            return;
+        }
+
         while (toggleKey.consumeClick()) {
             BounceState.toggle();
             syncMusic(client);
@@ -54,20 +60,35 @@ public class BounceModClient implements ClientModInitializer {
             }
         }
         while (settingsKey.consumeClick()) {
-            client.gui.setScreen(BounceConfigScreen.create(client.gui.screen()));
+            client.setScreen(BounceConfigScreen.create(client.screen));
         }
-        if (BounceState.enabled) syncMusic(client);
+
+        if (BounceState.enabled) {
+            syncMusic(client);
+        } else {
+            stopMusic(client);
+        }
     }
 
     private static void syncMusic(Minecraft client) {
-        if (client == null) return;
+        if (client == null || client.getSoundManager() == null) return;
         SoundManager sm = client.getSoundManager();
-        if (sm == null) return;
-        if (BounceState.enabled) {
-            if (musicSound == null) musicSound = new BounceMusicSound();
-            if (!sm.isActive(musicSound)) sm.play(musicSound);
-        } else if (musicSound != null && sm.isActive(musicSound)) {
+
+        if (musicSound == null) musicSound = new BounceMusicSound();
+
+        // Пересоздаём звук, если громкость изменилась (чтобы применилось сразу)
+        if (Math.abs(musicSound.getVolume() - BounceState.config.musicVolume) > 0.001f) {
             sm.stop(musicSound);
+            musicSound = new BounceMusicSound();
+        }
+
+        if (!sm.isActive(musicSound)) sm.play(musicSound);
+    }
+
+    private static void stopMusic(Minecraft client) {
+        if (client == null || client.getSoundManager() == null) return;
+        if (musicSound != null && client.getSoundManager().isActive(musicSound)) {
+            client.getSoundManager().stop(musicSound);
         }
     }
 }

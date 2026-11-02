@@ -14,8 +14,10 @@ public class BounceConfig {
     private static final Path PATH =
             FabricLoader.getInstance().getConfigDir().resolve("bouncemod.json");
 
-    public float bpm = 120.0f;
-    public float amplitude = 0.9f;      // сила сжатия (squash), по умолчанию заметная
+    public ModLanguage language = ModLanguage.AUTO;
+
+    public float bpm = 135.0f;
+    public float amplitude = 0.9f;
     public boolean alternating = false;
     public float musicVolume = 0.7f;
     public float range = 32.0f;
@@ -29,7 +31,10 @@ public class BounceConfig {
         if (Files.exists(PATH)) {
             try {
                 BounceConfig cfg = GSON.fromJson(Files.readString(PATH), BounceConfig.class);
-                if (cfg != null) return cfg;
+                if (cfg != null) {
+                    if (cfg.language == null) cfg.language = ModLanguage.AUTO;
+                    return cfg;
+                }
             } catch (IOException e) {
                 BounceModClient.LOGGER.error("Failed to read config", e);
             }

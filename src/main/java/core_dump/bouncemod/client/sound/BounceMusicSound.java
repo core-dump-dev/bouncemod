@@ -15,6 +15,12 @@ public class BounceMusicSound extends AbstractSoundInstance {
         super(ID, SoundSource.MUSIC, RandomSource.create());
     }
 
+    @Override
+    public void tick() {
+        // Каждый тик обновляем громкость — SoundManager применит новое значение сразу
+        this.volume = BounceState.config.musicVolume;
+    }
+
     @Override public boolean isLooping() { return true; }
     @Override public boolean isRelative() { return true; }
     @Override public float getVolume() { return BounceState.config.musicVolume; }

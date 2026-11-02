@@ -29,5 +29,8 @@
   "text.bouncemod.all.tooltip": "If on, every living entity squashes regardless of the categories above.",
 
   "text.bouncemod.toggle.on": "Squash: ON",
-  "text.bouncemod.toggle.off": "Squash: OFF"
+  "text.bouncemod.toggle.off": "Squash: OFF",
+
+  "text.bouncemod.language": "Language",
+  "text.bouncemod.language.tooltip": "Language of this settings screen. 'Auto' follows the game language."
 }

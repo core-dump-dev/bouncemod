@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,22 +42,15 @@ public class LivingEntityRendererMixin {
         float time = (mc.level.getGameTime() + mc.getDeltaTracker().getGameTimeDeltaPartialTick(false)) / 20.0f;
         float beatDuration = 60.0f / Math.max(1f, cfg.bpm);
         float phase = (time / beatDuration) % 1.0f;
-
-        // ping-pong 0..1 (0 = нет сжатия, 1 = максимальное сжатие)
         float pingPong = phase < 0.5f ? phase * 2f : (1f - phase) * 2f;
 
         if (cfg.alternating && (state.entityType.hashCode() & 1) != 0) {
             pingPong = 1f - pingPong;
         }
 
-        // SQUASH вместо BOUNCE
         float squash = pingPong * cfg.amplitude;
-
-        // Шире по горизонтали, ниже по вертикали — как в меме
         float sx = 1.0f + squash * 0.35f;
         float sy = 1.0f - squash * 0.30f;
-
-        // Пивот PoseStack у LivingEntityRenderer — ноги, поэтому модель приплюскивается к земле
         poseStack.scale(sx, sy, sx);
     }
 
@@ -73,6 +67,8 @@ public class LivingEntityRendererMixin {
     }
 
     private boolean isAnimal(EntityType<?> type) {
+        // AbstractVillager покрывает и Villager, и WanderingTrader
+        if (type == EntityTypes.VILLAGER || type == EntityTypes.WANDERING_TRADER) return true;
         return type == EntityTypes.COW || type == EntityTypes.PIG || type == EntityTypes.SHEEP
             || type == EntityTypes.CHICKEN || type == EntityTypes.HORSE;
     }
