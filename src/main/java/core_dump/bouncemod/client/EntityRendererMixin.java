@@ -30,8 +30,8 @@ public class EntityRendererMixin {
                                              SubmitNodeCollector collector, CameraRenderState cameraState,
                                              CallbackInfo ci) {
         if (state instanceof LivingEntityRenderState) return;
-
         if (!BounceState.enabled) return;
+
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.level == null) return;
         BounceConfig cfg = BounceState.config;
@@ -42,19 +42,15 @@ public class EntityRendererMixin {
         EntityType<?> type = state.entityType;
         boolean apply = false;
 
-        if (cfg.enableArmorStands && type == EntityTypes.ARMOR_STAND) {
-            apply = true;
-        }
-        
-        // В 26.3 используем builtInRegistryHolder().is(TagKey)
+        if (cfg.enableArmorStands && type == EntityTypes.ARMOR_STAND) apply = true;
+
+        // Используем ConventionalEntityTypeTags из Fabric API
         if (cfg.enableVehicles && (type.builtInRegistryHolder().is(ConventionalEntityTypeTags.BOATS)
                 || type.builtInRegistryHolder().is(ConventionalEntityTypeTags.MINECARTS))) {
             apply = true;
         }
-        
-        if (cfg.enableItems && (type == EntityTypes.ITEM || type == EntityTypes.EXPERIENCE_ORB)) {
-            apply = true;
-        }
+
+        if (cfg.enableItems && (type == EntityTypes.ITEM || type == EntityTypes.EXPERIENCE_ORB)) apply = true;
 
         if (!apply) return;
 
@@ -62,9 +58,7 @@ public class EntityRendererMixin {
         float phase = (time / (60.0f / Math.max(1f, cfg.bpm))) % 1.0f;
         float squashVal = CubicBezier.sample(cfg.curve, phase);
 
-        if (cfg.alternating && (type.hashCode() & 1) != 0) {
-            squashVal = 1f - squashVal;
-        }
+        if (cfg.alternating && (type.hashCode() & 1) != 0) squashVal = 1f - squashVal;
 
         float squash = squashVal * cfg.amplitude;
         poseStack.scale(1.0f + squash * 0.35f, 1.0f - squash * 0.30f, 1.0f + squash * 0.35f);

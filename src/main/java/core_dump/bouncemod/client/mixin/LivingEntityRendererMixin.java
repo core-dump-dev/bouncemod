@@ -41,7 +41,9 @@ public class LivingEntityRendererMixin {
         float phase = (time / (60.0f / Math.max(1f, cfg.bpm))) % 1.0f;
         float squashVal = CubicBezier.sample(cfg.curve, phase);
 
-        if (cfg.alternating && (state.entityType.hashCode() & 1) != 0) squashVal = 1f - squashVal;
+        if (cfg.alternating && (state.entityType.hashCode() & 1) != 0) {
+            squashVal = 1f - squashVal;
+        }
 
         float squash = squashVal * cfg.amplitude;
         poseStack.scale(1.0f + squash * 0.35f, 1.0f - squash * 0.30f, 1.0f + squash * 0.35f);
@@ -67,7 +69,8 @@ public class LivingEntityRendererMixin {
             || type == EntityTypes.AXOLOTL || type == EntityTypes.DOLPHIN
             || type == EntityTypes.TURTLE || type == EntityTypes.COD
             || type == EntityTypes.SALMON || type == EntityTypes.TROPICAL_FISH
-            || type == EntityTypes.PUFFERFISH;
+            || type == EntityTypes.PUFFERFISH
+            || type == EntityTypes.SULFUR_CUBE; // Серный куб добавлен в пассивные
     }
 
     private boolean isHostile(EntityType<?> type) {
@@ -77,7 +80,7 @@ public class LivingEntityRendererMixin {
             || type == EntityTypes.SHULKER || type == EntityTypes.WARDEN
             || type == EntityTypes.PILLAGER || type == EntityTypes.EVOKER
             || type == EntityTypes.VINDICATOR || type == EntityTypes.RAVAGER
-            || type == EntityTypes.SLIME || type == EntityTypes.MAGMA_CUBE; // Слизни добавлены
+            || type == EntityTypes.SLIME || type == EntityTypes.MAGMA_CUBE;
     }
 
     private boolean isNeutral(EntityType<?> type) {
