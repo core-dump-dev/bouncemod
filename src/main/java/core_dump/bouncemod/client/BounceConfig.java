@@ -19,13 +19,21 @@ public class BounceConfig {
     public float bpm = 135.0f;
     public float amplitude = 0.9f;
     public boolean alternating = false;
-    public float musicVolume = 0.2f;   // 20% по умолчанию
-    public float range = 32.0f;
+    public float musicVolume = 0.2f;
+    public float range = 64.0f;
 
-    public boolean enableAnimals = true;
-    public boolean enableHostile = true;
+    public SquashCurve curve = SquashCurve.HARD;
+
+    // --- Цели ---
     public boolean enablePlayers = true;
-    public boolean enableAllEntities = false;
+    public boolean enablePassive = true;
+    public boolean enableHostile = true;
+    public boolean enableNeutral = true;
+    public boolean enableBosses = true;
+    public boolean enableVehicles = true; // лодки, вагонетки
+    public boolean enableArmorStands = true;
+    public boolean enableHandItem = true; // предмет в руке
+    public boolean enableItems = false;   // выпавшие предметы
 
     public static BounceConfig load() {
         if (Files.exists(PATH)) {
@@ -33,6 +41,7 @@ public class BounceConfig {
                 BounceConfig cfg = GSON.fromJson(Files.readString(PATH), BounceConfig.class);
                 if (cfg != null) {
                     if (cfg.language == null) cfg.language = ModLanguage.AUTO;
+                    if (cfg.curve == null) cfg.curve = SquashCurve.HARD;
                     return cfg;
                 }
             } catch (IOException e) {

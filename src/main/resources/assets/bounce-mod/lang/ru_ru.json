@@ -7,12 +7,17 @@
   "text.bouncemod.category.general": "Основное",
   "text.bouncemod.category.targets": "Цели",
 
+  "text.bouncemod.language": "Язык интерфейса",
+  "text.bouncemod.language.tooltip": "Язык этого экрана. «Авто» — язык игры. (Переоткройте экран, чтобы применить!)",
+
   "text.bouncemod.bpm": "BPM",
   "text.bouncemod.bpm.tooltip": "Ударов в минуту — как быстро сущности сжимаются.",
 
   "text.bouncemod.amplitude": "Сила сжатия",
   "text.bouncemod.amplitude.tooltip": "Насколько сильно сжимается модель. 0 — выкл, 2 — максимум.",
 
+  "text.bouncemod.curve": "Кривая сжатия",
+  
   "text.bouncemod.alternating": "Чередование фазы",
   "text.bouncemod.alternating.tooltip": "Соседние сущности сжимаются в противоположной фазе.",
 
@@ -22,15 +27,16 @@
   "text.bouncemod.range": "Дальность (блоки)",
   "text.bouncemod.range.tooltip": "Максимальное расстояние, на котором сущности сжимаются.",
 
-  "text.bouncemod.animals": "Животные",
-  "text.bouncemod.hostile": "Враждебные мобы",
   "text.bouncemod.players": "Игроки",
-  "text.bouncemod.all": "Все сущности (переопределяет)",
-  "text.bouncemod.all.tooltip": "Если включено, сжимаются все живые сущности, независимо от галочек выше.",
+  "text.bouncemod.passive": "Пассивные и дружелюбные",
+  "text.bouncemod.hostile": "Враждебные и слизни",
+  "text.bouncemod.neutral": "Нейтральные",
+  "text.bouncemod.bosses": "Боссы",
+  "text.bouncemod.vehicles": "Транспорт (Лодки / Вагонетки)",
+  "text.bouncemod.armor_stands": "Стойки для брони",
+  "text.bouncemod.hand_item": "Предмет в руке",
+  "text.bouncemod.items": "Выпавшие предметы / Сферы опыта",
 
   "text.bouncemod.toggle.on": "Squash: ВКЛ",
-  "text.bouncemod.toggle.off": "Squash: ВЫКЛ",
-
-  "text.bouncemod.language": "Язык интерфейса",
-  "text.bouncemod.language.tooltip": "Язык этого экрана настроек. «Авто» — язык игры."
+  "text.bouncemod.toggle.off": "Squash: ВЫКЛ"
 }

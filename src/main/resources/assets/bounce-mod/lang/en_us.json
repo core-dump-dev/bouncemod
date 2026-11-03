@@ -7,12 +7,17 @@
   "text.bouncemod.category.general": "General",
   "text.bouncemod.category.targets": "Targets",
 
+  "text.bouncemod.language": "Interface Language",
+  "text.bouncemod.language.tooltip": "Language of this screen. 'Auto' follows the game language. (Reopen the screen to apply!)",
+
   "text.bouncemod.bpm": "BPM",
-  "text.bouncemod.bpm.tooltip": "Beats per minute — how fast entities squash.",
+  "text.bouncemod.bpm.tooltip": "Beats per minute - how fast entities squash.",
 
   "text.bouncemod.amplitude": "Squash Amount",
   "text.bouncemod.amplitude.tooltip": "How strong the squash is. 0 = off, 2 = extreme.",
 
+  "text.bouncemod.curve": "Squash Curve",
+  
   "text.bouncemod.alternating": "Alternating Phase",
   "text.bouncemod.alternating.tooltip": "Neighbouring entities squash in opposite phase.",
 
@@ -22,15 +27,16 @@
   "text.bouncemod.range": "Range (blocks)",
   "text.bouncemod.range.tooltip": "Max distance for entities to squash.",
 
-  "text.bouncemod.animals": "Animals",
-  "text.bouncemod.hostile": "Hostile Mobs",
   "text.bouncemod.players": "Players",
-  "text.bouncemod.all": "All Entities (override)",
-  "text.bouncemod.all.tooltip": "If on, every living entity squashes regardless of the categories above.",
+  "text.bouncemod.passive": "Passive & Friendly",
+  "text.bouncemod.hostile": "Hostile & Slimes",
+  "text.bouncemod.neutral": "Neutral",
+  "text.bouncemod.bosses": "Bosses",
+  "text.bouncemod.vehicles": "Vehicles (Boats / Minecarts)",
+  "text.bouncemod.armor_stands": "Armor Stands",
+  "text.bouncemod.hand_item": "Held Item",
+  "text.bouncemod.items": "Dropped Items / XP Orbs",
 
   "text.bouncemod.toggle.on": "Squash: ON",
-  "text.bouncemod.toggle.off": "Squash: OFF",
-
-  "text.bouncemod.language": "Language",
-  "text.bouncemod.language.tooltip": "Language of this settings screen. 'Auto' follows the game language."
+  "text.bouncemod.toggle.off": "Squash: OFF"
 }

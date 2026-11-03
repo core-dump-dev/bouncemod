@@ -3,6 +3,7 @@ package core_dump.bouncemod.client.mixin;
 import com.mojang.blaze3d.vertex.PoseStack;
 import core_dump.bouncemod.client.BounceConfig;
 import core_dump.bouncemod.client.BounceState;
+import core_dump.bouncemod.client.CubicBezier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -27,53 +28,60 @@ public class LivingEntityRendererMixin {
                                         SubmitNodeCollector collector, CameraRenderState cameraState,
                                         CallbackInfo ci) {
         if (!BounceState.enabled) return;
-
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.level == null) return;
-
         BounceConfig cfg = BounceState.config;
 
-        Vec3 entityPos = new Vec3(state.x, state.y, state.z);
-        if (entityPos.distanceToSqr(mc.player.position()) > cfg.range * cfg.range) return;
+        Vec3 pos = new Vec3(state.x, state.y, state.z);
+        if (pos.distanceToSqr(mc.player.position()) > cfg.range * cfg.range) return;
 
-        if (!shouldBounce(state, cfg)) return;
+        if (!shouldBounce(state.entityType, cfg)) return;
 
         float time = (mc.level.getGameTime() + mc.getDeltaTracker().getGameTimeDeltaPartialTick(false)) / 20.0f;
-        float beatDuration = 60.0f / Math.max(1f, cfg.bpm);
-        float phase = (time / beatDuration) % 1.0f;
-        float pingPong = phase < 0.5f ? phase * 2f : (1f - phase) * 2f;
+        float phase = (time / (60.0f / Math.max(1f, cfg.bpm))) % 1.0f;
+        float squashVal = CubicBezier.sample(cfg.curve, phase);
 
-        if (cfg.alternating && (state.entityType.hashCode() & 1) != 0) {
-            pingPong = 1f - pingPong;
-        }
+        if (cfg.alternating && (state.entityType.hashCode() & 1) != 0) squashVal = 1f - squashVal;
 
-        float squash = pingPong * cfg.amplitude;
-        float sx = 1.0f + squash * 0.35f;
-        float sy = 1.0f - squash * 0.30f;
-        poseStack.scale(sx, sy, sx);
+        float squash = squashVal * cfg.amplitude;
+        poseStack.scale(1.0f + squash * 0.35f, 1.0f - squash * 0.30f, 1.0f + squash * 0.35f);
     }
 
-    private boolean shouldBounce(LivingEntityRenderState state, BounceConfig cfg) {
-        if (cfg.enableAllEntities) return true;
-
-        EntityType<?> type = state.entityType;
-
-        if (cfg.enableAnimals && isAnimal(type)) return true;
-        if (cfg.enableHostile && isMonster(type)) return true;
+    private boolean shouldBounce(EntityType<?> type, BounceConfig cfg) {
         if (cfg.enablePlayers && type == EntityTypes.PLAYER) return true;
-
+        if (cfg.enablePassive && isPassive(type)) return true;
+        if (cfg.enableHostile && isHostile(type)) return true;
+        if (cfg.enableNeutral && isNeutral(type)) return true;
+        if (cfg.enableBosses && (type == EntityTypes.ENDER_DRAGON || type == EntityTypes.WITHER)) return true;
         return false;
     }
 
-    private boolean isAnimal(EntityType<?> type) {
-        // Жители и странствующие торговцы — тоже "животные" для нашей категории
-        if (type == EntityTypes.VILLAGER || type == EntityTypes.WANDERING_TRADER) return true;
+    private boolean isPassive(EntityType<?> type) {
         return type == EntityTypes.COW || type == EntityTypes.PIG || type == EntityTypes.SHEEP
-            || type == EntityTypes.CHICKEN || type == EntityTypes.HORSE;
+            || type == EntityTypes.CHICKEN || type == EntityTypes.GOAT
+            || type == EntityTypes.HORSE || type == EntityTypes.DONKEY || type == EntityTypes.MULE
+            || type == EntityTypes.LLAMA || type == EntityTypes.STRIDER
+            || type == EntityTypes.WOLF || type == EntityTypes.CAT || type == EntityTypes.PARROT
+            || type == EntityTypes.VILLAGER || type == EntityTypes.WANDERING_TRADER
+            || type == EntityTypes.IRON_GOLEM || type == EntityTypes.SNOW_GOLEM
+            || type == EntityTypes.AXOLOTL || type == EntityTypes.DOLPHIN
+            || type == EntityTypes.TURTLE || type == EntityTypes.COD
+            || type == EntityTypes.SALMON || type == EntityTypes.TROPICAL_FISH
+            || type == EntityTypes.PUFFERFISH;
     }
 
-    private boolean isMonster(EntityType<?> type) {
-        return type == EntityTypes.ZOMBIE || type == EntityTypes.SKELETON
-            || type == EntityTypes.CREEPER || type == EntityTypes.SPIDER;
+    private boolean isHostile(EntityType<?> type) {
+        return type == EntityTypes.ZOMBIE || type == EntityTypes.HUSK || type == EntityTypes.DROWNED
+            || type == EntityTypes.SKELETON || type == EntityTypes.STRAY || type == EntityTypes.ENDERMAN
+            || type == EntityTypes.CREEPER || type == EntityTypes.WITCH
+            || type == EntityTypes.SHULKER || type == EntityTypes.WARDEN
+            || type == EntityTypes.PILLAGER || type == EntityTypes.EVOKER
+            || type == EntityTypes.VINDICATOR || type == EntityTypes.RAVAGER
+            || type == EntityTypes.SLIME || type == EntityTypes.MAGMA_CUBE; // Слизни добавлены
+    }
+
+    private boolean isNeutral(EntityType<?> type) {
+        return type == EntityTypes.BEE || type == EntityTypes.ZOMBIFIED_PIGLIN
+            || type == EntityTypes.SPIDER || type == EntityTypes.CAVE_SPIDER;
     }
 }
