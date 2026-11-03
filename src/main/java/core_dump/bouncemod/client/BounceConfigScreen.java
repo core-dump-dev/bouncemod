@@ -34,7 +34,8 @@ public final class BounceConfigScreen {
         general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.bpm"), (int) cfg.bpm, 30, 300)
                 .setDefaultValue(135).setSaveConsumer(v -> cfg.bpm = v).build());
 
-        general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.amplitude"), (int) (cfg.amplitude * 100), 0, 200)
+        // Сила сжатия до 5.0 (в слайдере от 0 до 500)
+        general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.amplitude"), (int) (cfg.amplitude * 100), 0, 500)
                 .setDefaultValue(90).setSaveConsumer(v -> cfg.amplitude = v / 100f).build());
 
         general.addEntry(eb.startEnumSelector(ModLang.t("text.bouncemod.curve"), SquashCurve.class, cfg.curve)
@@ -70,8 +71,6 @@ public final class BounceConfigScreen {
                 .setDefaultValue(true).setSaveConsumer(v -> cfg.enableArmorStands = v).build());
         targets.addEntry(eb.startBooleanToggle(ModLang.t("text.bouncemod.hand_item"), cfg.enableHandItem)
                 .setDefaultValue(true).setSaveConsumer(v -> cfg.enableHandItem = v).build());
-        targets.addEntry(eb.startBooleanToggle(ModLang.t("text.bouncemod.items"), cfg.enableItems)
-                .setDefaultValue(false).setSaveConsumer(v -> cfg.enableItems = v).build());
 
         return builder.build();
     }

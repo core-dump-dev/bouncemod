@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import core_dump.bouncemod.client.BounceConfig;
 import core_dump.bouncemod.client.BounceState;
 import core_dump.bouncemod.client.CubicBezier;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalEntityTypeTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -44,13 +43,11 @@ public class EntityRendererMixin {
 
         if (cfg.enableArmorStands && type == EntityTypes.ARMOR_STAND) apply = true;
 
-        // Используем ConventionalEntityTypeTags из Fabric API
-        if (cfg.enableVehicles && (type.builtInRegistryHolder().is(ConventionalEntityTypeTags.BOATS)
-                || type.builtInRegistryHolder().is(ConventionalEntityTypeTags.MINECARTS))) {
+        // Проверка лодок и вагонеток по строковому ID (надежно для всех типов)
+        String id = type.getDescriptionId();
+        if (cfg.enableVehicles && (id.contains("boat") || id.contains("raft") || id.contains("minecart"))) {
             apply = true;
         }
-
-        if (cfg.enableItems && (type == EntityTypes.ITEM || type == EntityTypes.EXPERIENCE_ORB)) apply = true;
 
         if (!apply) return;
 

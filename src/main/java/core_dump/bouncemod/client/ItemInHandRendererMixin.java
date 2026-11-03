@@ -28,9 +28,11 @@ public class ItemInHandRendererMixin {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null) return;
 
-        // Используем те же тики, что и в мире, без инверсии
         float time = (mc.level.getGameTime() + mc.getDeltaTracker().getGameTimeDeltaPartialTick(false)) / 20.0f;
         float phase = (time / (60.0f / Math.max(1f, cfg.bpm))) % 1.0f;
+        
+        // Инвертируем фазу, чтобы рука сжималась одновременно с миром
+        phase = 1.0f - phase;
 
         float squashVal = CubicBezier.sample(cfg.curve, phase);
         float squash = squashVal * cfg.amplitude;

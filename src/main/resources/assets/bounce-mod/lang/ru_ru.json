@@ -14,7 +14,7 @@
   "text.bouncemod.bpm.tooltip": "Ударов в минуту — как быстро сущности сжимаются.",
 
   "text.bouncemod.amplitude": "Сила сжатия",
-  "text.bouncemod.amplitude.tooltip": "Насколько сильно сжимается модель. 0 — выкл, 2 — максимум.",
+  "text.bouncemod.amplitude.tooltip": "Насколько сильно сжимается модель. 0 — выкл, 5 — максимум.",
 
   "text.bouncemod.curve": "Кривая сжатия",
   
@@ -35,7 +35,6 @@
   "text.bouncemod.vehicles": "Транспорт (Лодки / Вагонетки)",
   "text.bouncemod.armor_stands": "Стойки для брони",
   "text.bouncemod.hand_item": "Предмет в руке",
-  "text.bouncemod.items": "Выпавшие предметы / Сферы опыта",
 
   "text.bouncemod.toggle.on": "Squash: ВКЛ",
   "text.bouncemod.toggle.off": "Squash: ВЫКЛ"

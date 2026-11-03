@@ -24,16 +24,14 @@ public class BounceConfig {
 
     public SquashCurve curve = SquashCurve.HARD;
 
-    // --- Цели ---
     public boolean enablePlayers = true;
     public boolean enablePassive = true;
     public boolean enableHostile = true;
     public boolean enableNeutral = true;
     public boolean enableBosses = true;
-    public boolean enableVehicles = true; // лодки, вагонетки
+    public boolean enableVehicles = true;
     public boolean enableArmorStands = true;
-    public boolean enableHandItem = true; // предмет в руке
-    public boolean enableItems = false;   // выпавшие предметы
+    public boolean enableHandItem = true;
 
     public static BounceConfig load() {
         if (Files.exists(PATH)) {

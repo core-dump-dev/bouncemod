@@ -14,7 +14,7 @@
   "text.bouncemod.bpm.tooltip": "Beats per minute - how fast entities squash.",
 
   "text.bouncemod.amplitude": "Squash Amount",
-  "text.bouncemod.amplitude.tooltip": "How strong the squash is. 0 = off, 2 = extreme.",
+  "text.bouncemod.amplitude.tooltip": "How strong the squash is. 0 = off, 5 = extreme.",
 
   "text.bouncemod.curve": "Squash Curve",
   
@@ -35,7 +35,6 @@
   "text.bouncemod.vehicles": "Vehicles (Boats / Minecarts)",
   "text.bouncemod.armor_stands": "Armor Stands",
   "text.bouncemod.hand_item": "Held Item",
-  "text.bouncemod.items": "Dropped Items / XP Orbs",
 
   "text.bouncemod.toggle.on": "Squash: ON",
   "text.bouncemod.toggle.off": "Squash: OFF"

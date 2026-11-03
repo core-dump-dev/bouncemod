@@ -6,9 +6,7 @@ public final class CubicBezier {
 
     public static float sample(SquashCurve curve, float x) {
         return switch (curve) {
-            case SINE -> (float) (0.5f - 0.5f * Math.cos(x * Math.PI));
-            case HARD -> sampleCurve(x, 0.9f, 1.0f, 0.0f, 0.0f); // Резкое сжатие
-            case LINEAR -> x;
+            case HARD -> sampleCurve(x, 0.9f, 1.0f, 0.0f, 0.0f);
             case EASE_IN_OUT -> sampleCurve(x, 0.42f, 0.0f, 0.58f, 1.0f);
         };
     }
