@@ -30,15 +30,14 @@ public class ItemInHandRendererMixin {
 
         float time = (mc.level.getGameTime() + mc.getDeltaTracker().getGameTimeDeltaPartialTick(false)) / 20.0f;
         float phase = (time / (60.0f / Math.max(1f, cfg.bpm))) % 1.0f;
-        
-        // Инвертируем фазу, чтобы рука сжималась одновременно с миром
-        phase = 1.0f - phase;
 
         float squashVal = CubicBezier.sample(cfg.curve, phase);
         float squash = squashVal * cfg.amplitude;
 
+        // Сжимаем и опускаем вниз
         float sx = 1.0f + squash * 0.35f;
         float sy = 1.0f - squash * 0.30f;
         poseStack.scale(sx, sy, sx);
+        poseStack.translate(0.0, -squash * 0.15f, 0.0);
     }
 }

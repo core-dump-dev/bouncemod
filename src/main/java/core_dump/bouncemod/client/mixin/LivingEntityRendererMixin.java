@@ -41,7 +41,9 @@ public class LivingEntityRendererMixin {
         float phase = (time / (60.0f / Math.max(1f, cfg.bpm))) % 1.0f;
         float squashVal = CubicBezier.sample(cfg.curve, phase);
 
-        if (cfg.alternating && (state.entityType.hashCode() & 1) != 0) squashVal = 1f - squashVal;
+        if (cfg.alternating && (state.entityType.hashCode() & 1) != 0) {
+            squashVal = 1f - squashVal;
+        }
 
         float squash = squashVal * cfg.amplitude;
         poseStack.scale(1.0f + squash * 0.35f, 1.0f - squash * 0.30f, 1.0f + squash * 0.35f);
@@ -57,7 +59,8 @@ public class LivingEntityRendererMixin {
     }
 
     private boolean isPassive(EntityType<?> type) {
-        return type == EntityTypes.COW || type == EntityTypes.PIG || type == EntityTypes.SHEEP
+        return type == EntityTypes.ARMOR_STAND // Добавили стойки для брони
+            || type == EntityTypes.COW || type == EntityTypes.PIG || type == EntityTypes.SHEEP
             || type == EntityTypes.CHICKEN || type == EntityTypes.GOAT
             || type == EntityTypes.HORSE || type == EntityTypes.DONKEY || type == EntityTypes.MULE
             || type == EntityTypes.LLAMA || type == EntityTypes.STRIDER
@@ -78,7 +81,7 @@ public class LivingEntityRendererMixin {
             || type == EntityTypes.PILLAGER || type == EntityTypes.EVOKER
             || type == EntityTypes.VINDICATOR || type == EntityTypes.RAVAGER
             || type == EntityTypes.SLIME || type == EntityTypes.MAGMA_CUBE
-            || type == EntityTypes.SULFUR_CUBE; // Перенесен во враждебные
+            || type == EntityTypes.SULFUR_CUBE;
     }
 
     private boolean isNeutral(EntityType<?> type) {

@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_25",
   "client": [
     "LivingEntityRendererMixin",
-    "EntityRendererMixin",
+    "AbstractBoatRendererMixin",
+    "AbstractMinecartRendererMixin",
     "ItemInHandRendererMixin"
   ],
   "injectors": { "defaultRequire": 1 },
