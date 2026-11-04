@@ -1,9 +1,9 @@
 package core_dump.bouncemod.client.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import core_dump.bouncemod.client.BounceAnimation;
 import core_dump.bouncemod.client.BounceConfig;
 import core_dump.bouncemod.client.BounceState;
-import core_dump.bouncemod.client.CubicBezier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.AbstractMinecartRenderer;
@@ -18,19 +18,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class AbstractMinecartRendererMixin {
 
     @Inject(method = "submit", at = @At("HEAD"))
-    private void bouncemod$squashMinecart(MinecartRenderState state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState cameraState, CallbackInfo ci) {
+    private void bouncemod$squashMinecart(MinecartRenderState state, PoseStack poseStack,
+            SubmitNodeCollector collector, CameraRenderState cameraState, CallbackInfo ci) {
         if (!BounceState.enabled) return;
         BounceConfig cfg = BounceState.config;
         if (!cfg.enableVehicles) return;
 
         Minecraft mc = Minecraft.getInstance();
-        if (mc.level == null) return;
+        if (mc.level == null || mc.player == null) return;
+        if (!BounceAnimation.isInRange(state.x, state.y, state.z, mc, cfg.range)) return;
 
-        float time = (mc.level.getGameTime() + mc.getDeltaTracker().getGameTimeDeltaPartialTick(false)) / 20.0f;
-        float phase = (time / (60.0f / Math.max(1f, cfg.bpm))) % 1.0f;
-        float squashVal = CubicBezier.sample(cfg.curve, phase);
-        float squash = squashVal * cfg.amplitude;
-
+        float squash = BounceAnimation.getSquash(mc, cfg);
         float sx = Math.max(0.2f, 1.0f + squash * 0.25f);
         float sy = Math.max(0.2f, 1.0f - squash * 0.25f);
         poseStack.scale(sx, sy, sx);

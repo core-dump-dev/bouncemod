@@ -38,7 +38,7 @@ public final class ModLang {
         EN.put("text.bouncemod.hostile", "Hostile");
         EN.put("text.bouncemod.neutral", "Neutral");
         EN.put("text.bouncemod.bosses", "Bosses");
-        EN.put("text.bouncemod.utility", "Utility (Golems, Villagers)");
+        EN.put("text.bouncemod.utility", "Utility (Golems, Villagers, Mannequin)");
         EN.put("text.bouncemod.vehicles", "Vehicles");
         EN.put("text.bouncemod.armor_stands", "Armor Stands & Mannequins");
         EN.put("text.bouncemod.hand_item", "Held Item");
@@ -73,7 +73,7 @@ public final class ModLang {
         RU.put("text.bouncemod.hostile", "Враждебные");
         RU.put("text.bouncemod.neutral", "Нейтральные");
         RU.put("text.bouncemod.bosses", "Боссы");
-        RU.put("text.bouncemod.utility", "Помощники (Големы, жители)");
+        RU.put("text.bouncemod.utility", "Помощники (големы, жители, манекен)");
         RU.put("text.bouncemod.vehicles", "Транспорт");
         RU.put("text.bouncemod.armor_stands", "Стойки и манекены");
         RU.put("text.bouncemod.hand_item", "Предмет в руке");

@@ -1,9 +1,9 @@
 package core_dump.bouncemod.client.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import core_dump.bouncemod.client.BounceAnimation;
 import core_dump.bouncemod.client.BounceConfig;
 import core_dump.bouncemod.client.BounceState;
-import core_dump.bouncemod.client.CubicBezier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -31,26 +30,19 @@ public class LivingEntityRendererMixin {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.level == null) return;
         BounceConfig cfg = BounceState.config;
-
-        Vec3 pos = new Vec3(state.x, state.y, state.z);
-        if (pos.distanceToSqr(mc.player.position()) > cfg.range * cfg.range) return;
-
+        if (!BounceAnimation.isInRange(state.x, state.y, state.z, mc, cfg.range)) return;
         if (!shouldBounce(state.entityType, cfg)) return;
 
-        float time = (mc.level.getGameTime() + mc.getDeltaTracker().getGameTimeDeltaPartialTick(false)) / 20.0f;
-        float phase = (time / (60.0f / Math.max(1f, cfg.bpm))) % 1.0f;
-        float squashVal = CubicBezier.sample(cfg.curve, phase);
-
-        float squash = squashVal * cfg.amplitude;
+        float squash = BounceAnimation.getSquash(mc, cfg);
         float sx = Math.max(0.2f, 1.0f + squash * 0.25f);
         float sy = Math.max(0.2f, 1.0f - squash * 0.25f);
         poseStack.scale(sx, sy, sx);
     }
 
     private boolean shouldBounce(EntityType<?> type, BounceConfig cfg) {
-        if (type == EntityTypes.ARMOR_STAND || type == EntityTypes.MANNEQUIN) return cfg.enableArmorStands;
+        if (type == EntityTypes.ARMOR_STAND) return cfg.enableArmorStands;
         if (type == EntityTypes.PLAYER) return cfg.enablePlayers;
-        if (type == EntityTypes.ALLAY || type == EntityTypes.COPPER_GOLEM || type == EntityTypes.IRON_GOLEM 
+        if (type == EntityTypes.MANNEQUIN || type == EntityTypes.ALLAY || type == EntityTypes.COPPER_GOLEM || type == EntityTypes.IRON_GOLEM 
             || type == EntityTypes.SNOW_GOLEM || type == EntityTypes.VILLAGER || type == EntityTypes.WANDERING_TRADER) {
             return cfg.enableUtility;
         }
