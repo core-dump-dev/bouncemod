@@ -1,3 +1,8 @@
+<h3 align="center">
+  <a href="https://github.com/core-dump-dev/bouncemod/blob/main/README.md">English</a> | 
+  <a href="https://github.com/core-dump-dev/bouncemod/blob/main/README-RU.md">Русский</a>
+</h3>
+
 # Bounce Mod (Squash)
 
 A client-side Fabric mod for Minecraft 26.3 that brings the "Bouncing Yaris" meme into the game. 
