@@ -29,12 +29,8 @@ public class AbstractMinecartRendererMixin {
         float time = (mc.level.getGameTime() + mc.getDeltaTracker().getGameTimeDeltaPartialTick(false)) / 20.0f;
         float phase = (time / (60.0f / Math.max(1f, cfg.bpm))) % 1.0f;
         float squashVal = CubicBezier.sample(cfg.curve, phase);
-        
-        if (cfg.alternating) {
-            squashVal = 1.0f - squashVal;
-        }
-
         float squash = squashVal * cfg.amplitude;
+
         float sx = Math.max(0.2f, 1.0f + squash * 0.25f);
         float sy = Math.max(0.2f, 1.0f - squash * 0.25f);
         poseStack.scale(sx, sy, sx);

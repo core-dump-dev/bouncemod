@@ -40,11 +40,6 @@ public class LivingEntityRendererMixin {
         float time = (mc.level.getGameTime() + mc.getDeltaTracker().getGameTimeDeltaPartialTick(false)) / 20.0f;
         float phase = (time / (60.0f / Math.max(1f, cfg.bpm))) % 1.0f;
         float squashVal = CubicBezier.sample(cfg.curve, phase);
-        
-        // Фаза (Anti-Phase): просто инвертируем значение
-        if (cfg.alternating) {
-            squashVal = 1.0f - squashVal;
-        }
 
         float squash = squashVal * cfg.amplitude;
         float sx = Math.max(0.2f, 1.0f + squash * 0.25f);
@@ -53,27 +48,17 @@ public class LivingEntityRendererMixin {
     }
 
     private boolean shouldBounce(EntityType<?> type, BounceConfig cfg) {
-        // 1. Стойки и манекены (Проверяем в первую очередь)
-        if (type == EntityTypes.ARMOR_STAND || type == EntityTypes.MANNEQUIN) {
-            return cfg.enableArmorStands;
-        }
-
-        // 2. Игроки
+        if (type == EntityTypes.ARMOR_STAND || type == EntityTypes.MANNEQUIN) return cfg.enableArmorStands;
         if (type == EntityTypes.PLAYER) return cfg.enablePlayers;
-
-        // 3. Помощники (Големы, жители, торговцы)
         if (type == EntityTypes.ALLAY || type == EntityTypes.COPPER_GOLEM || type == EntityTypes.IRON_GOLEM 
             || type == EntityTypes.SNOW_GOLEM || type == EntityTypes.VILLAGER || type == EntityTypes.WANDERING_TRADER) {
             return cfg.enableUtility;
         }
-
-        // 4. Остальные группы
         if (isPassive(type)) return cfg.enablePassive;
         if (isHostile(type)) return cfg.enableHostile;
         if (isNeutral(type)) return cfg.enableNeutral;
         if (isBoss(type)) return cfg.enableBosses;
         if (isVehicle(type)) return cfg.enableVehicles;
-
         return false;
     }
 

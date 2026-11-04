@@ -17,9 +17,6 @@
   "text.bouncemod.amplitude.tooltip": "How strong the squash is. 0 = off, 5 = extreme.",
 
   "text.bouncemod.curve": "Squash Curve",
-  
-  "text.bouncemod.alternating": "Invert Phase (Anti-Phase)",
-  "text.bouncemod.alternating.tooltip": "Inverts the animation. If it normally squashes, it will stretch first.",
 
   "text.bouncemod.volume": "Music Volume",
   "text.bouncemod.volume.tooltip": "Volume of the bounce music (0 to 1).",

@@ -37,18 +37,15 @@ public final class BounceConfigScreen {
                 .setDefaultValue(135).setTooltip(ModLang.t("text.bouncemod.bpm.tooltip"))
                 .setSaveConsumer(v -> cfg.bpm = v).build());
 
+        // Сила сжатия (дефолт 200)
         general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.amplitude"), (int) (cfg.amplitude * 100), 0, 500)
-                .setDefaultValue(90).setTooltip(ModLang.t("text.bouncemod.amplitude.tooltip"))
+                .setDefaultValue(200).setTooltip(ModLang.t("text.bouncemod.amplitude.tooltip"))
                 .setSaveConsumer(v -> cfg.amplitude = v / 100f).build());
 
         general.addEntry(eb.startEnumSelector(ModLang.t("text.bouncemod.curve"), SquashCurve.class, cfg.curve)
                 .setDefaultValue(SquashCurve.HARD)
                 .setEnumNameProvider(e -> Component.literal(((SquashCurve) e).display))
                 .setSaveConsumer(v -> cfg.curve = v).build());
-
-        general.addEntry(eb.startBooleanToggle(ModLang.t("text.bouncemod.alternating"), cfg.alternating)
-                .setDefaultValue(false).setTooltip(ModLang.t("text.bouncemod.alternating.tooltip"))
-                .setSaveConsumer(v -> cfg.alternating = v).build());
 
         general.addEntry(eb.startIntSlider(ModLang.t("text.bouncemod.volume"), (int) (cfg.musicVolume * 100), 0, 100)
                 .setDefaultValue(20).setTooltip(ModLang.t("text.bouncemod.volume.tooltip"))

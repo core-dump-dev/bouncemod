@@ -17,8 +17,7 @@ public class BounceConfig {
     public ModLanguage language = ModLanguage.AUTO;
 
     public float bpm = 135.0f;
-    public float amplitude = 0.9f;
-    public boolean alternating = false;
+    public float amplitude = 2.0f; // Дефолт 200 (хранится как float)
     public float musicVolume = 0.2f;
     public float range = 64.0f;
     public SquashCurve curve = SquashCurve.HARD;

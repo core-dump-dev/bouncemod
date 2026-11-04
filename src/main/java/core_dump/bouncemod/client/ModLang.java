@@ -27,9 +27,6 @@ public final class ModLang {
 
         EN.put("text.bouncemod.curve", "Squash Curve");
 
-        EN.put("text.bouncemod.alternating", "Invert Phase (Anti-Phase)");
-        EN.put("text.bouncemod.alternating.tooltip", "Inverts the animation. If it normally squashes, it will stretch first.");
-
         EN.put("text.bouncemod.volume", "Music Volume");
         EN.put("text.bouncemod.volume.tooltip", "Volume of the bounce music (0 to 1).");
 
@@ -64,9 +61,6 @@ public final class ModLang {
         RU.put("text.bouncemod.amplitude.tooltip", "Насколько сильно сжимается модель. 0 — выкл, 5 — максимум.");
 
         RU.put("text.bouncemod.curve", "Кривая сжатия");
-
-        RU.put("text.bouncemod.alternating", "ПротивоФаза (Anti-Phase)");
-        RU.put("text.bouncemod.alternating.tooltip", "Инвертирует анимацию. Если обычно модель сжимается, то теперь сначала растянется.");
 
         RU.put("text.bouncemod.volume", "Громкость музыки");
         RU.put("text.bouncemod.volume.tooltip", "Громкость музыки (от 0 до 1).");

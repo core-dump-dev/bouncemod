@@ -17,9 +17,6 @@
   "text.bouncemod.amplitude.tooltip": "Насколько сильно сжимается модель. 0 — выкл, 5 — максимум.",
 
   "text.bouncemod.curve": "Кривая сжатия",
-  
-  "text.bouncemod.alternating": "ПротивоФаза (Anti-Phase)",
-  "text.bouncemod.alternating.tooltip": "Инвертирует анимацию. Если обычно модель сжимается, то теперь сначала растянется.",
 
   "text.bouncemod.volume": "Громкость музыки",
   "text.bouncemod.volume.tooltip": "Громкость музыки (от 0 до 1).",
