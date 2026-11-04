@@ -6,6 +6,7 @@
     "LivingEntityRendererMixin",
     "AbstractBoatRendererMixin",
     "AbstractMinecartRendererMixin",
+    "EnderDragonRendererMixin",
     "ItemInHandRendererMixin"
   ],
   "injectors": { "defaultRequire": 1 },
