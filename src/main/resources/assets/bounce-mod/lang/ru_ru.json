@@ -29,9 +29,9 @@
   "text.bouncemod.hostile": "Враждебные",
   "text.bouncemod.neutral": "Нейтральные",
   "text.bouncemod.bosses": "Боссы",
-  "text.bouncemod.utility": "Помощники (големы, жители, манекен)",
+  "text.bouncemod.utility": "Помощники (големы, жители)",
   "text.bouncemod.vehicles": "Транспорт",
-  "text.bouncemod.armor_stands": "Стойки и манекены",
+  "text.bouncemod.armor_stands": "Декоративные (манекены и стойки)",
   "text.bouncemod.hand_item": "Предмет в руке",
 
   "text.bouncemod.toggle.on": "Squash: ВКЛ",

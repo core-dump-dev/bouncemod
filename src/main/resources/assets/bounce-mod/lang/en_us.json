@@ -29,9 +29,9 @@
   "text.bouncemod.hostile": "Hostile",
   "text.bouncemod.neutral": "Neutral",
   "text.bouncemod.bosses": "Bosses",
-  "text.bouncemod.utility": "Utility (Golems, Villagers, Mannequin)",
+  "text.bouncemod.utility": "Utility (Golems, Villagers)",
   "text.bouncemod.vehicles": "Vehicles",
-  "text.bouncemod.armor_stands": "Armor Stands & Mannequins",
+  "text.bouncemod.armor_stands": "Decorative (Mannequins & Armor Stands)",
   "text.bouncemod.hand_item": "Held Item",
 
   "text.bouncemod.toggle.on": "Squash: ON",

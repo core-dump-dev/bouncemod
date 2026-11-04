@@ -40,12 +40,21 @@ public class LivingEntityRendererMixin {
     }
 
     private boolean shouldBounce(EntityType<?> type, BounceConfig cfg) {
-        if (type == EntityTypes.ARMOR_STAND) return cfg.enableArmorStands;
+        // 1. Декоративные (Стойки для брони и Манекены)
+        if (type == EntityTypes.ARMOR_STAND || type == EntityTypes.MANNEQUIN) {
+            return cfg.enableArmorStands;
+        }
+        
+        // 2. Игроки
         if (type == EntityTypes.PLAYER) return cfg.enablePlayers;
-        if (type == EntityTypes.MANNEQUIN || type == EntityTypes.ALLAY || type == EntityTypes.COPPER_GOLEM || type == EntityTypes.IRON_GOLEM 
+        
+        // 3. Помощники (Големы, жители, торговцы)
+        if (type == EntityTypes.ALLAY || type == EntityTypes.COPPER_GOLEM || type == EntityTypes.IRON_GOLEM 
             || type == EntityTypes.SNOW_GOLEM || type == EntityTypes.VILLAGER || type == EntityTypes.WANDERING_TRADER) {
             return cfg.enableUtility;
         }
+        
+        // 4. Остальные категории
         if (isPassive(type)) return cfg.enablePassive;
         if (isHostile(type)) return cfg.enableHostile;
         if (isNeutral(type)) return cfg.enableNeutral;
