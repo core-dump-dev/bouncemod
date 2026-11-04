@@ -18,8 +18,8 @@
 
   "text.bouncemod.curve": "Squash Curve",
   
-  "text.bouncemod.alternating": "Alternating Phase",
-  "text.bouncemod.alternating.tooltip": "Neighbouring entities squash in opposite phase.",
+  "text.bouncemod.alternating": "Invert Phase (Anti-Phase)",
+  "text.bouncemod.alternating.tooltip": "Inverts the animation. If it normally squashes, it will stretch first.",
 
   "text.bouncemod.volume": "Music Volume",
   "text.bouncemod.volume.tooltip": "Volume of the bounce music (0 to 1).",
@@ -29,11 +29,12 @@
 
   "text.bouncemod.players": "Players",
   "text.bouncemod.passive": "Passive & Friendly",
-  "text.bouncemod.hostile": "Hostile & Slimes",
+  "text.bouncemod.hostile": "Hostile",
   "text.bouncemod.neutral": "Neutral",
   "text.bouncemod.bosses": "Bosses",
-  "text.bouncemod.vehicles": "Vehicles (Boats / Minecarts)",
-  "text.bouncemod.armor_stands": "Armor Stands",
+  "text.bouncemod.utility": "Utility (Golems, Villagers)",
+  "text.bouncemod.vehicles": "Vehicles",
+  "text.bouncemod.armor_stands": "Armor Stands & Mannequins",
   "text.bouncemod.hand_item": "Held Item",
 
   "text.bouncemod.toggle.on": "Squash: ON",

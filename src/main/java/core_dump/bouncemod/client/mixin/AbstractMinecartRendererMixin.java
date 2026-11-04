@@ -17,10 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(AbstractMinecartRenderer.class)
 public class AbstractMinecartRendererMixin {
 
-    @Inject(
-        method = "submit(Lnet/minecraft/client/renderer/entity/state/MinecartRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V",
-        at = @At("HEAD")
-    )
+    @Inject(method = "submit", at = @At("HEAD"))
     private void bouncemod$squashMinecart(MinecartRenderState state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState cameraState, CallbackInfo ci) {
         if (!BounceState.enabled) return;
         BounceConfig cfg = BounceState.config;
@@ -32,10 +29,14 @@ public class AbstractMinecartRendererMixin {
         float time = (mc.level.getGameTime() + mc.getDeltaTracker().getGameTimeDeltaPartialTick(false)) / 20.0f;
         float phase = (time / (60.0f / Math.max(1f, cfg.bpm))) % 1.0f;
         float squashVal = CubicBezier.sample(cfg.curve, phase);
+        
+        if (cfg.alternating) {
+            squashVal = 1.0f - squashVal;
+        }
 
-        if (cfg.alternating && (state.hashCode() & 1) != 0) squashVal = 1f - squashVal;
-
-        float squash = Math.max(-1f, Math.min(1f, squashVal * cfg.amplitude));
-        poseStack.scale(1.0f + squash * 0.35f, 1.0f - squash * 0.30f, 1.0f + squash * 0.35f);
+        float squash = squashVal * cfg.amplitude;
+        float sx = Math.max(0.2f, 1.0f + squash * 0.25f);
+        float sy = Math.max(0.2f, 1.0f - squash * 0.25f);
+        poseStack.scale(sx, sy, sx);
     }
 }

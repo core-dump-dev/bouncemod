@@ -5,13 +5,6 @@ import net.minecraft.network.chat.Component;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Локализация интерфейса мода с возможностью переопределить язык
- * независимо от языка игры.
- *
- * AUTO  -> используем Component.translatable (язык игры)
- * EN/RU -> используем захардкоженные строки через Component.literal
- */
 public final class ModLang {
 
     private static final Map<String, String> EN = new HashMap<>();
@@ -33,9 +26,9 @@ public final class ModLang {
         EN.put("text.bouncemod.amplitude.tooltip", "How strong the squash is. 0 = off, 5 = extreme.");
 
         EN.put("text.bouncemod.curve", "Squash Curve");
-        
-        EN.put("text.bouncemod.alternating", "Alternating Phase");
-        EN.put("text.bouncemod.alternating.tooltip", "Neighbouring entities squash in opposite phase.");
+
+        EN.put("text.bouncemod.alternating", "Invert Phase (Anti-Phase)");
+        EN.put("text.bouncemod.alternating.tooltip", "Inverts the animation. If it normally squashes, it will stretch first.");
 
         EN.put("text.bouncemod.volume", "Music Volume");
         EN.put("text.bouncemod.volume.tooltip", "Volume of the bounce music (0 to 1).");
@@ -45,11 +38,12 @@ public final class ModLang {
 
         EN.put("text.bouncemod.players", "Players");
         EN.put("text.bouncemod.passive", "Passive & Friendly");
-        EN.put("text.bouncemod.hostile", "Hostile & Slimes");
+        EN.put("text.bouncemod.hostile", "Hostile");
         EN.put("text.bouncemod.neutral", "Neutral");
         EN.put("text.bouncemod.bosses", "Bosses");
-        EN.put("text.bouncemod.vehicles", "Vehicles (Boats / Minecarts)");
-        EN.put("text.bouncemod.armor_stands", "Armor Stands");
+        EN.put("text.bouncemod.utility", "Utility (Golems, Villagers)");
+        EN.put("text.bouncemod.vehicles", "Vehicles");
+        EN.put("text.bouncemod.armor_stands", "Armor Stands & Mannequins");
         EN.put("text.bouncemod.hand_item", "Held Item");
 
         EN.put("text.bouncemod.toggle.on", "Squash: ON");
@@ -70,9 +64,9 @@ public final class ModLang {
         RU.put("text.bouncemod.amplitude.tooltip", "Насколько сильно сжимается модель. 0 — выкл, 5 — максимум.");
 
         RU.put("text.bouncemod.curve", "Кривая сжатия");
-        
-        RU.put("text.bouncemod.alternating", "Чередование фазы");
-        RU.put("text.bouncemod.alternating.tooltip", "Соседние сущности сжимаются в противоположной фазе.");
+
+        RU.put("text.bouncemod.alternating", "ПротивоФаза (Anti-Phase)");
+        RU.put("text.bouncemod.alternating.tooltip", "Инвертирует анимацию. Если обычно модель сжимается, то теперь сначала растянется.");
 
         RU.put("text.bouncemod.volume", "Громкость музыки");
         RU.put("text.bouncemod.volume.tooltip", "Громкость музыки (от 0 до 1).");
@@ -82,11 +76,12 @@ public final class ModLang {
 
         RU.put("text.bouncemod.players", "Игроки");
         RU.put("text.bouncemod.passive", "Пассивные и дружелюбные");
-        RU.put("text.bouncemod.hostile", "Враждебные и слизни");
+        RU.put("text.bouncemod.hostile", "Враждебные");
         RU.put("text.bouncemod.neutral", "Нейтральные");
         RU.put("text.bouncemod.bosses", "Боссы");
-        RU.put("text.bouncemod.vehicles", "Транспорт (Лодки / Вагонетки)");
-        RU.put("text.bouncemod.armor_stands", "Стойки для брони");
+        RU.put("text.bouncemod.utility", "Помощники (Големы, жители)");
+        RU.put("text.bouncemod.vehicles", "Транспорт");
+        RU.put("text.bouncemod.armor_stands", "Стойки и манекены");
         RU.put("text.bouncemod.hand_item", "Предмет в руке");
 
         RU.put("text.bouncemod.toggle.on", "Squash: ВКЛ");
@@ -95,19 +90,15 @@ public final class ModLang {
 
     private ModLang() {}
 
-    /** Возвращает Component с учётом выбранного в конфиге языка. */
     public static Component t(String key) {
         ModLanguage lang = BounceState.config.language;
         if (lang == null || lang == ModLanguage.AUTO) {
             return Component.translatable(key);
         }
         Map<String, String> map = (lang == ModLanguage.RU) ? RU : EN;
-        // Если ключа нет в словаре, вернёт сам ключ (например, text.bouncemod.curve)
-        // Теперь все ключи добавлены, поэтому отображаться будет корректный текст.
         return Component.literal(map.getOrDefault(key, key));
     }
 
-    /** Отображаемое имя языка для дропдауна. */
     public static String displayName(ModLanguage lang) {
         return switch (lang) {
             case AUTO -> "Auto / Авто";
