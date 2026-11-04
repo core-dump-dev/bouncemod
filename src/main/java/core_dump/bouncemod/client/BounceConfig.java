@@ -16,22 +16,22 @@ public class BounceConfig {
 
     public ModLanguage language = ModLanguage.AUTO;
 
+    // --- Основные параметры ---
     public float bpm = 135.0f;
     public float amplitude = 0.9f;
     public boolean alternating = false;
     public float musicVolume = 0.2f;
     public float range = 64.0f;
-
     public SquashCurve curve = SquashCurve.HARD;
 
+    // --- Цели ---
     public boolean enablePlayers = true;
-    public boolean enablePassive = true;
-    public boolean enableHostile = true;
-    public boolean enableNeutral = true;
-    public boolean enableBosses = true;
-    public boolean enableVehicles = true;
-    public boolean enableArmorStands = true;
-    public boolean enableHandItem = true;
+    public boolean enablePassive = true;      // животные, жители, големы, водные, летучие мыши, помощники
+    public boolean enableHostile = true;      // монстры, слизни, эндермен, пиглины и т.д.
+    public boolean enableBosses = true;       // Дракон и Визер
+    public boolean enableVehicles = true;     // лодки, плоты, вагонетки
+    public boolean enableArmorStands = true;  // стойки для брони
+    public boolean enableHandItem = true;     // предмет в руке
 
     public static BounceConfig load() {
         if (Files.exists(PATH)) {

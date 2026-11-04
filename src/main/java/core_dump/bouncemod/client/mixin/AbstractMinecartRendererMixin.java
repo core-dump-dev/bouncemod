@@ -35,7 +35,7 @@ public class AbstractMinecartRendererMixin {
 
         if (cfg.alternating && (state.hashCode() & 1) != 0) squashVal = 1f - squashVal;
 
-        float squash = squashVal * cfg.amplitude;
+        float squash = Math.max(-1f, Math.min(1f, squashVal * cfg.amplitude));
         poseStack.scale(1.0f + squash * 0.35f, 1.0f - squash * 0.30f, 1.0f + squash * 0.35f);
     }
 }

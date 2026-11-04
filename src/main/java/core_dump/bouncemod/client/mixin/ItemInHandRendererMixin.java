@@ -32,12 +32,12 @@ public class ItemInHandRendererMixin {
         float phase = (time / (60.0f / Math.max(1f, cfg.bpm))) % 1.0f;
 
         float squashVal = CubicBezier.sample(cfg.curve, phase);
-        float squash = squashVal * cfg.amplitude;
+        float squash = Math.max(-1f, Math.min(1f, squashVal * cfg.amplitude));
 
-        // Сжимаем и опускаем вниз
         float sx = 1.0f + squash * 0.35f;
         float sy = 1.0f - squash * 0.30f;
         poseStack.scale(sx, sy, sx);
+        // Опускаем руку вниз, чтобы она синхронизировалась с мобами
         poseStack.translate(0.0, -squash * 0.15f, 0.0);
     }
 }
