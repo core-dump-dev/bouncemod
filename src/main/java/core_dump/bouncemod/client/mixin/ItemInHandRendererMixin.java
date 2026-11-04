@@ -21,17 +21,15 @@ public class ItemInHandRendererMixin {
     private void bouncemod$beginHandTransform(float partialTick, PoseStack poseStack,
             SubmitNodeCollector collector, PlayerRenderState playerState,
             FirstPersonHandsAndItemsRenderState handState, CallbackInfo ci) {
-        // Isolate our transform from the caller and from subsequent render submissions.
+        
+        if (!BounceState.enabled || !BounceState.config.enableHandItem) return;
+        
         poseStack.pushPose();
-
-        if (!BounceState.enabled) return;
-        BounceConfig cfg = BounceState.config;
-        if (!cfg.enableHandItem) return;
 
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null) return;
 
-        float squash = Math.max(-1.0f, Math.min(1.0f, BounceAnimation.getSquash(mc, cfg)));
+        float squash = Math.max(-1.0f, Math.min(1.0f, BounceAnimation.getSquash(mc, BounceState.config)));
         float sx = 1.0f + squash * 0.35f;
         float sy = 1.0f - squash * 0.30f;
         poseStack.scale(sx, sy, sx);
@@ -42,6 +40,9 @@ public class ItemInHandRendererMixin {
     private void bouncemod$endHandTransform(float partialTick, PoseStack poseStack,
             SubmitNodeCollector collector, PlayerRenderState playerState,
             FirstPersonHandsAndItemsRenderState handState, CallbackInfo ci) {
+        
+        if (!BounceState.enabled || !BounceState.config.enableHandItem) return;
+        
         poseStack.popPose();
     }
 }

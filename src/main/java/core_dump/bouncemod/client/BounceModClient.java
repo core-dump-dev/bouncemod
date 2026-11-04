@@ -43,7 +43,6 @@ public class BounceModClient implements ClientModInitializer {
     }
 
     private void onClientTick(Minecraft client) {
-        // Если игрок не в мире — принудительно останавливаем музыку
         if (client.player == null || client.level == null) {
             stopMusic(client);
             return;
@@ -64,7 +63,6 @@ public class BounceModClient implements ClientModInitializer {
         }
 
         if (BounceState.enabled) {
-            // Останавливаем фоновую музыку Minecraft, чтобы не было конфликта
             client.getMusicManager().stopPlaying();
             syncMusic(client);
         } else {
@@ -78,12 +76,7 @@ public class BounceModClient implements ClientModInitializer {
 
         if (musicSound == null) musicSound = new BounceMusicSound();
 
-        // Пересоздаём звук, если громкость изменилась (чтобы применилось сразу)
-        if (Math.abs(musicSound.getVolume() - BounceState.config.musicVolume) > 0.001f) {
-            sm.stop(musicSound);
-            musicSound = new BounceMusicSound();
-        }
-
+        // Никаких пересозданий звука! SoundManager сам подхватит новую громкость из tick()
         if (!sm.isActive(musicSound)) sm.play(musicSound);
     }
 

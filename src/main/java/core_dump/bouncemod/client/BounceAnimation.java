@@ -2,10 +2,6 @@ package core_dump.bouncemod.client;
 
 import net.minecraft.client.Minecraft;
 
-/**
- * Shared per-frame animation sample. All renderers use the same cached value,
- * so the curve is evaluated once for a given extracted frame/configuration.
- */
 public final class BounceAnimation {
     private static long cachedGameTime = Long.MIN_VALUE;
     private static int cachedPartialBits;
@@ -17,7 +13,7 @@ public final class BounceAnimation {
 
     private BounceAnimation() {}
 
-    public static synchronized float getSquash(Minecraft client, BounceConfig config) {
+    public static float getSquash(Minecraft client, BounceConfig config) {
         if (client.level == null) return 0.0f;
 
         long gameTime = client.level.getGameTime();
@@ -51,6 +47,7 @@ public final class BounceAnimation {
         double dx = x - client.player.getX();
         double dy = y - client.player.getY();
         double dz = z - client.player.getZ();
+        // Квадрат расстояния - работает быстро, корень не извлекаем
         return dx * dx + dy * dy + dz * dz <= (double) range * range;
     }
 }
