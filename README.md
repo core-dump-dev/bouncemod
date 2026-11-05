@@ -9,6 +9,9 @@ A client-side Fabric mod for Minecraft 26.3 that brings the "Bouncing Yaris" mem
 
 All living entities, vehicles, and even the item in your hand can squash and stretch to the beat of the music.
 
+<img src="media\preview.gif" alt="Bounce Mod Preview" width="600">
+
+
 ## Features
 - **Sync to music:** Entities squash and stretch to a custom BPM (default 135).
 - **Customizable Squash:** Adjust the squash amount (up to 5.0) and choose between different squash curves (Hard Squash, Ease In-Out).
